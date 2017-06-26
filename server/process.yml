@@ -1,0 +1,11 @@
+# Process file for PM2
+
+apps:
+  - script: redis-server
+    name: redis-server
+    exec_mode: fork
+    instances: 1
+#  - script: mysqld
+#    name: mysqld
+#    exec_mode: fork
+#    instances: 1
