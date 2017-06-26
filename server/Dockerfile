@@ -86,20 +86,18 @@ RUN rm -rf /var/cache/yum/*
 
 # Setting develop enviroment
 ENV ENV_NODE development
-# ENV DEBUG *
+ENV DEBUG ""
+
 RUN mkdir -p /usr/src/app
 
-WORKDIR /usr/src/app
-
-CMD ["node"]
-
 # Entrypoint
-# RUN mkdir /docker-entrypoint-initdb.d
-# ADD mysql-entrypoint.sh /entrypoint.sh
-# ENTRYPOINT ["/entrypoint.sh"]
+RUN mkdir /docker-entrypoint-initdb.d
+ADD mysql-entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
 
 # Final configs
-# EXPOSE 3306 33060
-# COPY process.yml /process.yml
+EXPOSE 3306 33060
+COPY process.yml /process.yml
 
-# CMD ["pm2-docker", "process.yml"]
+CMD ["pm2-docker", "process.yml"]
