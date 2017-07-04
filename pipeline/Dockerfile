@@ -10,6 +10,10 @@ RUN yum install -y nodejs npm
 RUN npm install -g pm2 grunt-cli n
 RUN n 6.9.3
 
+# Installing JSCS and JSHint
+RUN npm install -g jscs
+RUN npm install -g jshint
+
 # Installing PHP 7.1
 RUN yum install -y \
 	https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
@@ -35,6 +39,7 @@ RUN sed -ie "s/;date.timezone =/date.timezone = America\/Mexico_City/" /etc/php.
 
 # Installing Composer
 ENV PATH "/composer/vendor/bin:$PATH"
+
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /composer
 ENV COMPOSER_VERSION 1.4.2
@@ -51,6 +56,15 @@ RUN curl -s -f -L -o /tmp/installer.php https://raw.githubusercontent.com/compos
  && php /tmp/installer.php --no-ansi --install-dir=/usr/bin --filename=composer --version=${COMPOSER_VERSION} \
  && rm /tmp/installer.php \
  && composer --ansi --version --no-interaction
+
+# Installing Allman CodeSniffer
+RUN composer global require linnk/allman-codesniffer
+
+RUN phpcs --config-set installed_paths /composer/vendor/linnk/allman-codesniffer/
+RUN phpcs --config-set default_standard Allman
+RUN phpcs --config-set report_width auto
+RUN phpcs --config-set show_progress 1
+RUN phpcs --config-set colors 1
 
 # Clearing
 RUN rm -rf /var/cache/yum/*
