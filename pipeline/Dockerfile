@@ -3,7 +3,7 @@ FROM centos:centos7
 LABEL maintainer="Linnk"
 
 # Installing utilities
-RUN yum install -y unzip gettext epel-release
+RUN yum install -y unzip gettext epel-release openssh-clients
 
 # Installing Node, NPM & packages
 RUN yum install -y nodejs npm

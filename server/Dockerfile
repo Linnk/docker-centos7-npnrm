@@ -16,6 +16,8 @@ RUN yum install -y \
 	gearmand \
 	gettext \
 	which \
+	openssh-server \
+	openssh-clients \
 	nano
 
 # Installing MySQL server
