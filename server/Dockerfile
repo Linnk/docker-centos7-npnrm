@@ -9,6 +9,7 @@ ENV PACKAGE_URL https://repo.mysql.com/yum/mysql-5.7-community/docker/x86_64/mys
 # Installing utilities
 RUN yum install -y \
 	unzip \
+	bzip2 \
 	epel-release \
 	bind-utils \
 	yum-utils \

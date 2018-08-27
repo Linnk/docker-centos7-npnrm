@@ -22,28 +22,38 @@ This one is going to be a lite version (kind of) of the server image. The object
 docker pull linnk/centos7-np-pipeline
 ```
 
-**NOTE**: np (node, php)
+**NOTE**: np-pipeline (node, php, bitbucket pipelines)
 
-## Bulding image
+## Bulding and updating
 
-Instructions to build yourself the image:
+Instructions to build the «server» configuration:
 
 ```
-docker build -t docker-centos7-npnrm .
+cd server/
+docker build -t centos7-npnrm .
+docker commit centos7-npnrm linnk/centos7-npnrm
+docker push linnk/centos7-npnrm
+```
+
+Useful additional commands for the «server» image:
+
+```
 docker run --name centos7-npnrm -e MYSQL_ROOT_PASSWORD=root -d centos7-npnrm
-```
-
-Executing bash in the server image:
-
-```
 docker exec -i -t centos7-npnrm /bin/bash
-```
 
-Stopping and clearing:
+docker ps
 
-```
 docker stop centos7-npnrm
 docker rm centos7-npnrm
+```
+
+Instructions to build the «pipeline» configuration:
+
+```
+cd server/
+docker build -t centos7-np-pipeline .
+docker commit centos7-np-pipeline linnk/centos7-np-pipeline
+docker push linnk/centos7-np-pipeline
 ```
 
 Docker containers are fun. :)
