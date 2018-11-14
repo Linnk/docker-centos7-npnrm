@@ -25,6 +25,7 @@ RUN yum install -y php \
 	php-fpm \
 	php-gd \
 	php-pecl-gearman \
+	php-pecl-zip \
 	php-mbstring \
 	php-pecl-yaml \
 	php-mcrypt \

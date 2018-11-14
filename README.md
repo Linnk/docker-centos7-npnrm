@@ -50,7 +50,7 @@ docker rm centos7-npnrm
 Instructions to build the «pipeline» configuration:
 
 ```
-cd server/
+cd pipeline/
 docker build -t centos7-np-pipeline .
 docker commit centos7-np-pipeline linnk/centos7-np-pipeline
 docker push linnk/centos7-np-pipeline
